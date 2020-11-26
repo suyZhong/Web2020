@@ -2,3 +2,5 @@ exp1.pdf
 maildir
 .vscode
 __pycache__
+invert*
+path

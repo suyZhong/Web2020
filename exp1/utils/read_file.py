@@ -1,19 +1,21 @@
 import os
 
-def getfilelist(mail_dir, filelist):
-    if os.path.isfile(mail_dir):
-        filelist.append(mail_dir)
-    elif os.path.isdir(mail_dir):
-        for s in os.listdir(mail_dir):
-            newdir = os.path.join(mail_dir, s)
+def getfilelist(maildir, filelist):
+    if os.path.isfile(maildir):
+        filelist.append(maildir)
+    elif os.path.isdir(maildir):
+        for s in os.listdir(maildir):
+            newdir = os.path.join(maildir, s)
             getfilelist(newdir, filelist)
     return filelist
 
 if __name__ == "__main__":
-    file = open("../dataset/path", 'a')
-    filelist=[]
-    getfilelist(mail_dir="../dataset/maildir/", filelist=filelist)
+    file = open("../dataset/path", 'w')
+    filelist = []
+    docID = 0
+    getfilelist(maildir="../dataset/maildir/", filelist=filelist)
     for p in filelist:
-        p=p+'\n'
+        p=p+' '+str(docID)+'\n'
         file.write(p)
+        docID += 1
     file.close()
