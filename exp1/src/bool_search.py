@@ -1,6 +1,7 @@
 import argparse
 from nltk import stem
 import re
+import math
 
 
 #only for test
@@ -75,19 +76,21 @@ def parse_query(query):
             print("Your Bool is wrong")
     while stack:
         result.append(stack.pop())
+    print(result)
     return result
 
 
-def load_index(token, IndexPath):
+def load_index(token, indexPath):
     docList = []
-    stemmer = stem.SnowballStemmer('english')
-    f = open(IndexPath, "r")
-    p = re.compile(str(stemmer.stem(token)))
+    f = open(indexPath, "r")
+    p = re.compile(str(token))
     print(str(token))
     flag = 0
+    line = 0
     for t in f:
+        line +=1
         if re.match(p, t):
-            print('success find ' + token + ' in invert index!')
+            print('successfully find ' + token + ' in invert index No '+str(line)+' !')
             docListGap = t.split()[1:]
             flag = 1
             break
@@ -100,14 +103,88 @@ def load_index(token, IndexPath):
     f.close()
     return docList
 
+def bool_NOT(opList, allList):
+    if not opList:
+        return allList
+    result = []
+    index = 0
+    maxIndex = len(opList)
+    for i in allList:
+        if i != opList[index]:
+            result.append(i)
+        elif index + 1 < maxIndex:
+            index += 1
+    return result
 
-def search(query, IndexPath):
+
+def bool_OR(leftList, rightList):
+    # 没有跳表指针，使用ppt上的索引算法
+    result = []
+    leftIndex = 0 #p1
+    rightIndex = 0 #p2
+    lMaxIndex = len(leftList)
+    rMaxIndex = len(rightList)
+    while leftIndex < lMaxIndex and rightIndex < rMaxIndex:
+        if leftList[leftIndex] == rightList[rightIndex]:
+            result.append(leftList[leftIndex])
+            leftIndex += 1
+            rightIndex += 1
+        elif leftList[leftIndex] < rightList[rightIndex]:
+            result.append(leftList[leftIndex])
+            leftIndex += 1
+        elif rightList[rightIndex] < leftList[leftIndex]:
+            result.append(rightList[rightIndex])
+            rightIndex += 1
+    #因为是OR，还得把剩下的弄完
+    while leftIndex < lMaxIndex:
+        result.append(leftList[leftIndex])
+        leftIndex += 1
+    while rightIndex < rMaxIndex:
+        result.append(rightList[rightIndex])
+        rightIndex += 1
+    return result
+
+def bool_AND(leftList, rightList):
+    result = []
+    leftIndex = 0  # p1
+    rightIndex = 0  # p2
+    lMaxIndex = len(leftList)
+    rMaxIndex = len(rightList)
+    while leftIndex < lMaxIndex and rightIndex < rMaxIndex:
+        if leftList[leftIndex] == rightList[rightIndex]:
+            result.append(leftList[leftIndex])
+            leftIndex += 1
+            rightIndex += 1
+        elif leftList[leftIndex] < rightList[rightIndex]:
+            leftIndex += 1
+        elif rightList[rightIndex] < leftList[leftIndex]:
+            rightIndex += 1
+    return result
+
+
+def search(query, indexPath, indexList):
     stack = []
     for word in query:
-        if word.isalpha:
-            stack.append(load_index(word, IndexPath))
-        elif word is "|":
-            result = boolNOT(stack.pop())
+        if word.isalpha():
+            result = load_index(word, indexPath)
+        elif word is "!":
+            print(stack[-1])
+            result = bool_NOT(stack.pop(), indexList)
+        elif word is '|':
+            rightList = stack.pop()
+            leftList = stack.pop()
+            result = bool_OR(leftList, rightList)
+        elif word is '&':
+            rightList = stack.pop()
+            leftList = stack.pop()
+            result = bool_AND(leftList, rightList)
+        else:
+            print("idk what happened")
+            exit(1)
+        stack.append(result)
+    if len(stack) != 1:
+        print("ERROR EROOR ur input might be wrong")
+    return stack.pop()
 
 
 if __name__ == "__main__":
@@ -117,11 +194,24 @@ if __name__ == "__main__":
     parser.add_argument('--scan', action='store_true',
                         help='use keyboard input')
 
-    path = "../output/index.txt"
+    indexPath = "../output/index.txt"
+    dataPath = "../dataset/path"
+
+    p = open(dataPath, "r")
+
+    indexNum = 0
+    docIndex = []
+    for l in p:
+        indexNum+=1
+        docIndex.append(indexNum)
+    p.close()
+
     methods = parser.parse_args()
-    query = "powerANDnaturalOR!businessANDmessage"
+    query = "power&businessANDenergy&natural"
     listQuery = parse_query(query)
     # for token in diction:
-        # docList = load_index(token, path)
+        # docList = load_index(token, indexPath)
         # print(docList)
-    search(listQuery, path)
+    result = search(listQuery, indexPath, docIndex)
+    print(result)
+
