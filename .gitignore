@@ -4,3 +4,6 @@ maildir
 __pycache__
 invert*
 path
+*.log
+index.txt
+df.txt

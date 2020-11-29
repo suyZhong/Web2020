@@ -12,10 +12,10 @@ def getfilelist(maildir, filelist):
 if __name__ == "__main__":
     file = open("../dataset/path", 'w')
     filelist = []
-    docID = 0
+    docID = 1
     getfilelist(maildir="../dataset/maildir/", filelist=filelist)
     for p in filelist:
-        p=p+' '+str(docID)+'\n'
+        p=p+'\n'
         file.write(p)
         docID += 1
     file.close()

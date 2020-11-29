@@ -26,4 +26,7 @@
   - ![ori_save](figs/ori_save.png)
   - ![ori_size](figs/ori_size.png)
   - ![ori_eg](figs/ori_eg.png)
-- 
+
+
+
+- 布尔检索部分：考虑到群里的要求，需要做一个语义分析。
