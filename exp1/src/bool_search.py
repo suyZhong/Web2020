@@ -207,11 +207,26 @@ if __name__ == "__main__":
     p.close()
 
     methods = parser.parse_args()
-    query = "power&businessANDenergy&natural"
+    query = "power&businessORenergy & natural AND signed"
+    print(query)
     listQuery = parse_query(query)
     # for token in diction:
         # docList = load_index(token, indexPath)
         # print(docList)
     result = search(listQuery, indexPath, docIndex)
-    print(result)
+    docNum = len(result)
+    # print(result)
+    p = open(dataPath, "r")
+    docIndex = 0
+    num = 0
+    for path in p:
+        num += 1
+        if num == result[docIndex]:
+            docIndex+=1
+            path = re.sub(r'\.\./dataset/', "", path, 1)
+            print("docID = "+str(num)+" is "+path)
+        if docIndex == docNum:
+            break
+    p.close()
+
 
