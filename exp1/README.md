@@ -70,24 +70,24 @@ nltk.download()
 ```shell
 ├── README.md
 ├── dataset
-│   ├── path//<docID-文档路径>对
-│   └── tokenized//空文件夹，存放分词后的文档
-├── exp1.pdf//实验文档
-├── figs//实验报告与README图片来源
+│   ├── path	//<docID-文档路径>对
+│   └── tokenized	//空文件夹，存放分词后的文档
+├── exp1.pdf	//实验文档
+├── figs	//实验报告与README图片来源
 ├── output						
-│   ├── df.txt//存放前一千个词项对应的df
-│   ├── index.txt//存放倒排表
-│   ├── tf_idf.npz//存放使用scipy.sparse压缩的tf-idf矩阵
+│   ├── df.txt	//存放前一千个词项对应的df
+│   ├── index.txt	//存放倒排表
+│   ├── tf_idf.npz	//存放使用scipy.sparse压缩的tf-idf矩阵
 │   ├── some logs
-│   └── tf_idf_small.npz//存放1000x1000的debug矩阵
+│   └── tf_idf_small.npz	//存放1000x1000的debug矩阵
 ├── src
-│   ├── bool_search.py//布尔查询
-│   └── semantic_search.py//语义查询
+│   ├── bool_search.py	//布尔查询
+│   └── semantic_search.py	//语义查询
 ├── utils
-│   ├── read_file.py//用来生成path对的文件
-│   ├── matrix.py//用来生成tf-idf的文件
-│   ├── tokenization.py//用来生成倒排表的优化前文件
-│   └── tokenization_opt.py//优化后的生成倒排表的文件
+│   ├── read_file.py	//用来生成path对的文件
+│   ├── matrix.py	//用来生成tf-idf的文件
+│   ├── tokenization.py	//用来生成倒排表的优化前文件
+│   └── tokenization_opt.py	//优化后的生成倒排表的文件
 └── 实验文档.md
 ```
 
