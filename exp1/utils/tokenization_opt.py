@@ -45,7 +45,7 @@ for p in paths:
     # if docID != 13677:
         # docID+=1
         # continue
-    # if docID >= 40000:
+    # if docID >= 10000:
         # break
     p = re.sub(r"\n", "", p)
     f = open(p)
@@ -53,7 +53,7 @@ for p in paths:
         content = f.readlines()
     except:
         print(str(docID)+' '+p)
-        docID+1
+        docID+=1
         f.close()
     else:
         # 正则阶段不耗时。。。
@@ -106,7 +106,11 @@ for p in paths:
                     stemmedTokens.append(stemmedToken)
         # end = time.time()
         # stemTime += end-start
-
+        #把分词结果存起来
+        writeFd = open(re.sub(r'\.\./dataset', "../dataset/tokenized", p), "w")
+        for t in stemmedTokens:
+            writeFd.write(t+'\n')
+        writeFd.close()
         # 构建倒排索引（循环每个文档，不断加入）
         # 发现这种方法时间复杂度是O(n^2)，主要是not in invertIndex
         # for token in stemmedTokens:

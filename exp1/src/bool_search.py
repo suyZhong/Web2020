@@ -189,8 +189,8 @@ def search(query, indexPath, indexList):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--file', type=str, default="",
-                        help='choose the input file!')
+    parser.add_argument('--query', type=str, default="",
+                        help='enter directly')
     parser.add_argument('--scan', action='store_true',
                         help='use keyboard input')
 
@@ -207,14 +207,20 @@ if __name__ == "__main__":
     p.close()
 
     methods = parser.parse_args()
-    query = "power&businessORenergy & natural AND signed"
+    if methods.scan:
+        inQuery = input(
+            "Please enter the query(any form like 'plans&presidentOR!naturalANDNOT(company | message)'):\n")
+    elif methods.query is not "":
+        inQuery = methods.query
+    else:
+        query = "power&businessORenergy & natural AND signed"
     print(query)
     listQuery = parse_query(query)
     # for token in diction:
         # docList = load_index(token, indexPath)
         # print(docList)
     result = search(listQuery, indexPath, docIndex)
-    docNum = len(result)
+    resultDocNum = len(result)
     # print(result)
     p = open(dataPath, "r")
     docIndex = 0
@@ -223,9 +229,9 @@ if __name__ == "__main__":
         num += 1
         if num == result[docIndex]:
             docIndex+=1
-            path = re.sub(r'\.\./dataset/', "", path, 1)
-            print("docID = "+str(num)+" is "+path)
-        if docIndex == docNum:
+            path = re.sub(r'\.\.\/dataset/', "", path, 1)
+            print("result is docID = "+str(num)+" which is "+path)
+        if docIndex == resultDocNum:
             break
     p.close()
 
