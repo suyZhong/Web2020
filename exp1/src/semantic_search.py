@@ -32,7 +32,7 @@ if __name__ == "__main__":
     elif opt.query is not "":
         inQuery = opt.query
     else:
-        inQuery = "The president plans to offer the customers in the market"
+        inQuery = "The president plans to be a power and energy company"
     
     print("\nWaiting for load the matrix")
     sparseMat = sparse.load_npz(tfidfPath)
@@ -47,8 +47,9 @@ if __name__ == "__main__":
     listQuery = inQuery.split()
     vecQuery = pd.Series(np.zeros(tfidf.shape[0]), index=tokenList)
     for word in listQuery:
+        word = stemmer.stem(word)
         if word in tokenList:
-            vecQuery[stemmer.stem(word)] = 1
+            vecQuery[word] = 1
     print('\nQuery in vec is like')
     print(vecQuery)
 

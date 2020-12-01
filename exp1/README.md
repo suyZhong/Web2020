@@ -55,7 +55,7 @@ nltk.download()
 
 然后使用`utils/tokenization_opt.py`对`dataset/path`进行遍历，对每个文档依次进行，正则化，分词，去停用词，词根化，获取分词后的文档「在后续实验中，选择将其存储，以便生成tf-idf」，然后遍历这个文档的词进行倒排表的建立，倒排表存储在`output/`里面
 
-使用`utils/tf_matrix.py`对之前存储的分词结果进行遍历，并建立tf-idf矩阵，使用scipy中的sparse进行矩阵压缩，将压缩后的.npz文件存储在`output/`里
+使用`utils/matrix.py`对之前存储的分词结果进行遍历，并建立tf-idf矩阵，使用scipy中的sparse进行矩阵压缩，将压缩后的.npz文件存储在`output/`里
 
 ##### 检索
 
@@ -77,14 +77,14 @@ nltk.download()
 ├── output						
 │   ├── df.txt						//存放前一千个词项对应的df
 │   ├── index.txt					//存放倒排表
-│   ├── tf_idf.npz				//存放压缩的tf-idf矩阵
+│   ├── tf_idf.npz				//存放使用scipy.sparse压缩的tf-idf矩阵
 │   └── tf_idf_small.npz	//存放1000x1000的debug矩阵
 ├── src
 │   ├── bool_search.py		//布尔查询
 │   └── semantic_search.py//语义查询
 ├── utils
 │   ├── read_file.py			//用来生成path对的文件
-│   ├── tf_matrix.py			//用来生成tf-idf的文件
+│   ├── matrix.py			//用来生成tf-idf的文件
 │   ├── tokenization.py		//用来生成倒排表的优化前文件
 │   └── tokenization_opt.py//优化后的生成倒排表的文件
 └── 实验文档.md
@@ -100,8 +100,7 @@ nltk.download()
 
 - 一开始的方法：循环每一篇文档，使用正则化方法处理一些非文本等无关内容，如邮件头部，HTML标签等等，然后进行分词，去停用词，词根化。输出，即保存倒排表用了很蠢的方法。
   - ![ori_save](figs/ori_save.png)
-  - ![ori_size](figs/ori_size.png)
-  - ![ori_eg](figs/ori_eg.png)
+  - ![ori_size](figs/ori_size.png) ![ori_eg](figs/ori_eg.png)
 
 
 
