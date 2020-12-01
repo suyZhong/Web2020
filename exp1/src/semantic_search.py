@@ -11,7 +11,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--query', type=str, default="",
                         help='enter directly')
-    parser.add_argument('--scan', action='store_true',
+    parser.add_argument('--scan', action='store_true', default=False,
                         help='use keyboard input')
     parser.add_argument('--debug',action='store_true', default=False)
 
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     elif opt.query is not "":
         inQuery = opt.query
     else:
-        inQuery = "The president plans to contact the customers in the market"
+        inQuery = "The president plans to offer the customers in the market"
     
     print("\nWaiting for load the matrix")
     sparseMat = sparse.load_npz(tfidfPath)

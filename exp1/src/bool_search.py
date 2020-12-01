@@ -191,7 +191,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--query', type=str, default="",
                         help='enter directly')
-    parser.add_argument('--scan', action='store_true',
+    parser.add_argument('--scan', action='store_true', default=False,
                         help='use keyboard input')
 
     indexPath = "../output/index.txt"
@@ -222,6 +222,7 @@ if __name__ == "__main__":
     result = search(listQuery, indexPath, docIndex)
     resultDocNum = len(result)
     # print(result)
+    print('\n')
     p = open(dataPath, "r")
     docIndex = 0
     num = 0
