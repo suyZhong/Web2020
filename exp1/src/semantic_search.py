@@ -36,10 +36,10 @@ if __name__ == "__main__":
     
     print("\nWaiting for load the matrix")
     sparseMat = sparse.load_npz(tfidfPath)
-    print("Successfuly load the matrix")
     # sparseMat = np.load(tfidfPath, allow_pickle=True)[()]
     # sparseMat = pd.read_csv(tfidfPath)
     tfidf = pd.DataFrame.sparse.from_spmatrix(sparseMat,index=tokenList)
+    print("Successfuly load the matrix")
     print(tfidf.head())
 
     stemmer = stem.SnowballStemmer('english')

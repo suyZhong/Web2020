@@ -13,9 +13,11 @@ import nltk
 nltk.download()
 ```
 
+经测试：本机pandas==0.25.1，可能需要pandas>=0.25.1版本
+
 ## Tutorial 
 
-最好在Linux「没试过」或Mac上测试
+最好在Linux~~「没试过」~~「试过了（CentOS）」或Mac上测试
 
 #### 布尔查询
 
