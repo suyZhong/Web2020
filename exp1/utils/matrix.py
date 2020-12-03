@@ -69,12 +69,14 @@ for i in range(tf_idf.shape[0]):
 print(tf_idf[0][:15])
 
 paths.close()
+# tfidf_coo = sparse.coo_matrix(tf_idf); //可以为了CUDA去掉这行注释 以及下面那行savetxt
 tf_idf = csr_matrix(tf_idf)
 print(tf_idf[0])
 
 # tf_idf
 sparse.save_npz("../output/tf_idf.npz", tf_idf)
-# sparse.save_npz("../output/tf_idf_small.npz", tf_idf)
+# np.savetxt("../output/tfidf_coo.txt",(tfidf_coo.data, tfidf_coo.row, tfidf_coo.col))
+# sparse.save_npz("../output/tf_idf_small.npz", tf_idf) 
 # np.save("../output/tf_idf.npz", tf_idf)
 
 # tf_idf = pd.DataFrame(tf_idf, index=tokenList)

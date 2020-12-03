@@ -81,6 +81,7 @@ nltk.download()
 │   ├── index.txt	//存放倒排表
 │   ├── tf_idf.npz	//存放使用scipy.sparse压缩的tf-idf矩阵
 │   ├── some logs
+│   ├── idf.txt  //存放CUDA C用的输入
 │   └── tf_idf_small.npz	//存放1000x1000的debug矩阵
 ├── src
 │   ├── bool_search.py	//布尔查询
@@ -89,6 +90,7 @@ nltk.download()
 │   ├── read_file.py	//用来生成path对的文件
 │   ├── matrix.py	//用来生成tf-idf的文件
 │   ├── tokenization.py	//用来生成倒排表的优化前文件
+│   ├── tf_idf.cu		//用来拓展的CUDA C程序
 │   └── tokenization_opt.py	//优化后的生成倒排表的文件
 └── 实验文档.md
 ```
