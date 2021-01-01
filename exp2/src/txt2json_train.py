@@ -2,8 +2,8 @@ import re
 import json5
 
 # trainT = open("../dataset/train.txt", 'r')
-trainT = open("../dataset/train_off.txt", 'r')
-trainJ = open("../dataset/train_off.json", 'w')
+trainT = open("../dataset/train.txt", 'r')
+trainJ = open("../dataset/train.json", 'w')
 
 
 tryList = [{"text":'asd', 'label':'123'},

@@ -16,6 +16,8 @@ let validationAccuracy = (1.0 - relationClassifier.validationMetrics.classificat
 let evaluationMetrics = relationClassifier.evaluation(on: testingData, textColumn: "text", labelColumn: "label")
 
 let evaluationAccuracy = (1.0 - evaluationMetrics.classificationError) * 100
+print("evaluationAccuracy is ")
+print(evaluationAccuracy)
 
 let modelURL = playgroundSharedDataDirectory
 let metaData = MLModelMetadata(author: "Suyuz", shortDescription: "Classify relation")
