@@ -1,6 +1,7 @@
 exp1.pdf
 maildir
 .vscode
+.idea
 __pycache__
 invert*
 path
@@ -9,3 +10,5 @@ index.txt
 df.txt
 trash*
 tf*
+PB18111764*
+secret.txt
