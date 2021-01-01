@@ -1,6 +1,6 @@
-f1 = open("../results/swiftResult.txt", "r")
+f1 = open("../results/nbResult.txt", "r")
 # TODO
-f2 = open("../dataset/dev_val_ans.txt", "r")
+f2 = open("../results/dev_test_ans.txt", "r")
 
 myAns = []
 valAns = []
