@@ -5,6 +5,12 @@ import nltk
 
 NUM = 6400
 
+
+relationClasses = ['Cause-Effect', 'Component-Whole', 'Entity-Destination',
+                   'Product-Producer', 'Entity-Origin',
+                   'Member-Collection', 'Message-Topic',
+                   'Content-Container', 'Instrument-Agency', 'Other']
+
 # trainT = open("../dataset/train.txt", 'r')
 trainT = open("../dataset/train.txt", 'r')
 trainJ = open("../dataset/trainBaidu.txt", 'w')
@@ -26,10 +32,11 @@ for line in trainT:
         tmp = re.sub(r'["|\,|\.|\(|\)]', "", tmp)
         tmpList.append(tmp)
     else:
-        tmpList.append(re.match(r"([a-zA-Z\-]*)", line).group())
+        index = relationClasses.index(re.match(r"([a-zA-Z\-]*)", line).group())
+        tmpList.append(index)
         trainList.loc[int(l/2)] = tmpList
     l += 1
 
 trainT.close()
 trainJ.close()
-trainList.to_csv("../dataset/trainBaiduCalss.csv",index=None,columns=None,sep="\t")
+trainList.to_csv("../dataset/trainTransformers.csv",index=None,columns=None,sep='\t')
