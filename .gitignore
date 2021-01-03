@@ -14,3 +14,5 @@ PB18111764*
 secret.txt
 log*
 copy*
+stanford-corenlp*
+*.npy

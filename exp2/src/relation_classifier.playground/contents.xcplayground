@@ -3,5 +3,6 @@
     <pages>
         <page name='classifier'/>
         <page name='dev_classifier'/>
+        <page name='word_embedding'/>
     </pages>
 </playground>

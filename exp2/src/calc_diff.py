@@ -1,4 +1,4 @@
-f1 = open("../results/nbResult.txt", "r")
+f1 = open("../results/autoResult.txt", "r")
 # TODO
 f2 = open("../results/dev_test_ans.txt", "r")
 
@@ -18,5 +18,4 @@ s = 0
 for i in range(num):
     if valAns[i] == myAns[i]:
         s +=1
-
 print(s/num)
