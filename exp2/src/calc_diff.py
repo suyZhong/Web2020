@@ -1,6 +1,6 @@
-f1 = open("../results/autoResult.txt", "r")
+f1 = open("../results/nbResult", "r")
 # TODO
-f2 = open("../results/dev_test_ans.txt", "r")
+f2 = open("../detaset/dev_test_ans.txt", "r")
 
 myAns = []
 valAns = []

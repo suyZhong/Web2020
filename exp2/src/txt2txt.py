@@ -13,7 +13,6 @@ relationClasses = ['Cause-Effect', 'Component-Whole', 'Entity-Destination',
 
 # trainT = open("../dataset/train.txt", 'r')
 trainT = open("../dataset/train.txt", 'r')
-trainJ = open("../dataset/trainBaidu.txt", 'w')
 
 
 tryList = [{"text": 'asd', 'label': '123'},
@@ -38,5 +37,4 @@ for line in trainT:
     l += 1
 
 trainT.close()
-trainJ.close()
 trainList.to_csv("../dataset/trainTransformers.csv",index=None,columns=None,sep='\t')

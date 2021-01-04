@@ -6,7 +6,8 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction import text
 from sklearn.linear_model import SGDClassifier
 import gensim
-from gensim.models.doc2vec import Doc2Vec,LabeledSentence
+from gensim.models.doc2vec import Doc2Vec, LabeledSentence
+from simpletransformers.classification import ClassificationModel
 
 
 relationClasses = ['Cause-Effect', 'Component-Whole', 'Entity-Destination',
@@ -160,16 +161,28 @@ if __name__ == "__main__":
     else:
         if opt.method == "NB":
             classifier = MultinomialNB(1 - 0.009 * opt.alpha)
+            classifier.fit(trainDoc2Vec, labelList)
+            maxResult = classifier.predict(testDoc2Vec)
         elif opt.method == "SGD":
             classifier = SGDClassifier()
-        classifier.fit(trainDoc2Vec, labelList)
+            classifier.fit(trainDoc2Vec, labelList)
+            maxResult = classifier.predict(testDoc2Vec)
+        elif opt.method == "ROBERTA":
+            model = ClassificationModel(
+                "roberta", "./outputs", use_cuda=False)
+            predict, rawOut = model.predict(testTextList)
+            # predict, rawOut = model.predict(
+            #     ["The body of her nephew was in a suitcase under the bed"])
+            maxResult=[]
+            for i in predict:
+                maxResult.append(relationClasses[i])
+
         # classifier.fit(trainOneHotVec, labelList)
         # maxResult = classifier.predict(testOneHotVec)
         # maxResult = classifier.predict(testVectors)
-        maxResult = classifier.predict(testDoc2Vec)
 
-
-    fp = open("../results/autoResult.txt", "w")
+    print(maxResult)
+    fp = open("../results/stResult.txt", "w")
     for i in maxResult:
         fp.write(i)
         fp.write('\n')
