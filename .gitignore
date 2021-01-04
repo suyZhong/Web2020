@@ -16,3 +16,4 @@ log*
 copy*
 stanford-corenlp*
 *.npy
+outputs*
