@@ -17,3 +17,6 @@ copy*
 stanford-corenlp*
 *.npy
 outputs*
+*.dat
+relation.txt
+exp3_example_submission.txt
