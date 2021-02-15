@@ -20,3 +20,6 @@ outputs*
 *.dat
 relation.txt
 exp3_example_submission.txt
+*.model
+钟溯飏*
+result*
