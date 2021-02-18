@@ -50,14 +50,14 @@ if __name__ == "__main__":
         algo = SVD(n_epochs=gs.best_params['rmse']['n_epochs'],
                    reg_all=gs.best_params['rmse']['reg_all'], lr_all=gs.best_params['rmse']['lr_all'])
     else:
-        algo = SVD(n_epochs=20, reg_all=0.08)
+        algo = SVD(n_epochs=20, reg_all=0.08, biased=False)
 
     print("begin fit and predict- KFold")
     for trainset, testset in tqdm(kf.split(data)):
         algo.fit(trainset)
         predictions = algo.test(testset)
         accuracy.rmse(predictions, verbose=True)
-    dump.dump("../output/SVDbias.model",algo=algo)
+    dump.dump("../output/SVDFunk.model",algo=algo)
 
     # # trashy
     # trainset = data.build_full_trainset()

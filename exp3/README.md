@@ -7,15 +7,18 @@
 
 ## TODO
 
-- [x] just use SVD (1,2,3)
-  - full dataset is not good than K-Fold
-  - fault: !!! use `round()` not `int()`
+- [x] just use SVD (1,2,3,5)
+  - full dataset 2 is not good than K-Fold1
+  - fault: !!! use `round()` not `int()` 3
   - PunkSVD not better than BiasSVD
   - SVDpp Too slow
-  - {'n_epochs': 10, 'lr_all': 0.005, 'reg_all': 0.04}
+  - KNNbsl 5
+- [x] use boost (6)
+  - SVD+KNN bagging linear 6 not good
+    - perhaps not enough models...
+- [x] use grid cv on SVD(4)
+  - {'n_epochs': 10, 'lr_all': 0.005, 'reg_all': 0.04} 4
   - {'n_epochs': 20, 'lr_all': 0.005, 'reg_all': 0.06}
   - 1.2161151806697987
     - {'n_epochs': 20, 'reg_all': 0.08}
-- [ ] use boost (3)
-- [ ] use grid cv on SVD(4)
 

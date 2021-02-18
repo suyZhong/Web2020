@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from surprise import KNNBasic
+from surprise import KNNBaseline
 from surprise import Dataset
 from surprise import accuracy
 from surprise import Reader
@@ -19,7 +19,7 @@ reader = Reader(rating_scale=(0, 5))
 data = Dataset.load_from_df(trainData[['user_id', 'mov_id','rating']], reader=reader)
 
 kf = KFold(n_splits=3)
-algo = KNNBasic(k=20)
+algo = KNNBaseline(k=5)
 # pred, algo = dump.load("../output/SVD")
 
 print("begin fit and predict")
