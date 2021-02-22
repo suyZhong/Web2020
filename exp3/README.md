@@ -12,10 +12,11 @@
   - fault: !!! use `round()` not `int()` 3
   - PunkSVD not better than BiasSVD
   - SVDpp Too slow
-  - KNNbsl 5
+  - KNNbsl (k=5)5
 - [x] use boost (6)
   - SVD+KNN bagging linear 6 not good
     - perhaps not enough models...
+  - SVD KNN baseline coclus 7 not good even
 - [x] use grid cv on SVD(4)
   - {'n_epochs': 10, 'lr_all': 0.005, 'reg_all': 0.04} 4
   - {'n_epochs': 20, 'lr_all': 0.005, 'reg_all': 0.06}

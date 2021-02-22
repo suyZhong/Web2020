@@ -12,14 +12,14 @@ from tqdm import tqdm
 from surprise.model_selection import GridSearchCV
 import argparse
 
-# #direct read from file
-# reader = Reader(line_format='user item rating timestamp', sep=',')
-# data = Dataset.load_from_file("../dataset/training.dat", reader=reader)
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', type=str, default='run')
     opt = parser.parse_args()
     print(opt.mode)
+    #direct read from file
+    # reader = Reader(line_format='user item rating timestamp', sep=',')
+    # data = Dataset.load_from_file("../dataset/training.dat", reader=reader)
     trainData = pd.read_csv("../dataset/training.dat", sep=',', usecols=[
                             0, 1, 2], header=None, names=['user_id', 'mov_id', 'rating'])
     print(trainData)
@@ -28,8 +28,8 @@ if __name__ == "__main__":
 
 
 
-    param_grid = {'n_epochs': [20, 10],
-                  'reg_all': [0.05, 0.08, 0.2]}
+    param_grid = {'n_factors': [100, 150, 50],
+                  'reg_all': [0.05, 0.08]}
     # algo = SVD(biased=False)
 
     # algo = SVDpp(verbose=True) #TOO SLOW CANT FINISH
@@ -47,11 +47,9 @@ if __name__ == "__main__":
 
     kf = KFold(n_splits=3)
     if opt.mode == 'grid':
-        algo = SVD(n_epochs=gs.best_params['rmse']['n_epochs'],
-                   reg_all=gs.best_params['rmse']['reg_all'], lr_all=gs.best_params['rmse']['lr_all'])
+        algo = SVD(reg_all=gs.best_params['rmse']['reg_all'], n_factors=gs.best_params['rmse']['n_factors'])
     else:
-        algo = SVD(n_epochs=20, reg_all=0.08, biased=False)
-
+        algo = SVD(n_epochs=20, reg_all=0.08,verbose=True)
     print("begin fit and predict- KFold")
     for trainset, testset in tqdm(kf.split(data)):
         algo.fit(trainset)
