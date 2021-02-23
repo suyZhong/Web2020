@@ -22,4 +22,5 @@
   - {'n_epochs': 20, 'lr_all': 0.005, 'reg_all': 0.06}
   - 1.2161151806697987
     - {'n_epochs': 20, 'reg_all': 0.08}
+- [x] consider timestamp(8)
 

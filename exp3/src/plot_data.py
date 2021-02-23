@@ -19,7 +19,8 @@ from tqdm import tqdm
 trainData = pd.read_csv("../dataset/training.dat", sep=',', usecols=[0, 1, 2, 3], header=None, names=['user_id', 'mov_id', 'rate', 'timestamp'])
 testData = pd.read_csv("../dataset/testing.dat", sep=',',usecols=[0,1], header=None, names= ['user_id', 'mov_id'])
 
-print(trainData['rate'].mean())
+ratingMean = trainData['rate'].mean()
+print(ratingMean)
 # print("begin plot rating-cnt fig")
 # rate = [0, 1, 2, 3, 4, 5]
 # # rateCnt = trainData['rate'].value_counts()
@@ -69,6 +70,7 @@ print("begin plot time trend")
 timeRatingDf = pd.DataFrame(data=trainData[['timestamp','rate']])
 
 timeRatingMeanDf = timeRatingDf.groupby('timestamp').agg('mean')
+timeRatingMeanDf['delta']=timeRatingMeanDf['rate'].apply(lambda x: x-ratingMean)
 timeRatingMeanDf.to_csv('../dataset/training_mean.dat')
 
 timeRatingMeanDf.plot(label="time rate trend")
