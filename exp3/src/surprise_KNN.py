@@ -19,7 +19,11 @@ reader = Reader(rating_scale=(0, 5))
 data = Dataset.load_from_df(trainData[['user_id', 'mov_id','rating']], reader=reader)
 
 kf = KFold(n_splits=3)
-algo = KNNBaseline(k=10)
+
+sim_options = {'name': 'pearson_baseline',
+               'shrinkage': 0  # no shrinkage
+               }
+algo = KNNBaseline(k=10, sim_options=sim_options)
 # pred, algo = dump.load("../output/SVD")
 
 print("begin fit and predict")
